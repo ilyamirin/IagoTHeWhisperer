@@ -1,0 +1,2 @@
+parameters:
+  database.url: mysql://jokly:zM3ad8wVQVmZqBHr@database:3306/eukariot

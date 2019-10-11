@@ -1,0 +1,2 @@
+parameters:
+  database.url: mysql://lynx:lynx@database:3306/sberbank_profile
