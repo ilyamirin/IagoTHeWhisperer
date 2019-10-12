@@ -21,6 +21,11 @@ class Bank
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tariff", mappedBy="bank")
+     */
+    private $tariffs;
+
     public function getId(): ?int
     {
         return $this->id;
