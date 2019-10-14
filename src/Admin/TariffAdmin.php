@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 use App\Entity\Bank;
+use App\Entity\Tariff;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -31,5 +32,13 @@ class TariffAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list->add('name');
+    }
+
+    public function toString($object)
+    {
+        return $object instanceof Tariff
+            ? $object->getName()
+            : 'Тариф'
+        ;
     }
 }

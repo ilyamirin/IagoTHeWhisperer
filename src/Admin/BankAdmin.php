@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use App\Entity\Bank;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -23,5 +24,13 @@ class BankAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list->add('name');
+    }
+
+    public function toString($object)
+    {
+        return $object instanceof Bank
+            ? $object->getName()
+            : 'Банк'
+        ;
     }
 }
