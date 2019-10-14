@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,9 +23,15 @@ class Bank
     private $name;
 
     /**
+     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Tariff", mappedBy="bank")
      */
     private $tariffs;
+
+    public function __construct()
+    {
+        $this->tariffs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -39,6 +46,20 @@ class Bank
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getTariffs(): ArrayCollection
+    {
+        return $this->tariffs;
+    }
+
+    public function addTariff(Tariff $tariff): self
+    {
+        if (!$this->tariffs->contains($tariff)) {
+            $this->tariffs->add($tariff);
+        }
 
         return $this;
     }

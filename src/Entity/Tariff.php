@@ -60,4 +60,16 @@ class Tariff
 
         return $this;
     }
+
+    public function getBank(): ?Bank
+    {
+        return $this->bank;
+    }
+
+    public function setBank(?Bank $bank): self
+    {
+        $this->bank = $bank;
+
+        return $this;
+    }
 }
