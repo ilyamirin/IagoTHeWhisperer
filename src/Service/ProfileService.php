@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Tariff;
-use App\Objects\Profile;
+use App\Object\Profile;
 use App\Repository\TariffRepository;
 
 class ProfileService

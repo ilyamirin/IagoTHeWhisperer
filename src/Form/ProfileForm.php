@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Objects\Profile;
+use App\Object\Profile;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
