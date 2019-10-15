@@ -31,10 +31,10 @@ services:
         class: App\Admin\BankAdmin
         arguments: [~, App\Entity\Bank, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: 'Банк' }
+            - { name: sonata.admin, manager_type: orm, label: 'Банк', group: 'Анкета' }
 
     admin.tariff:
         class: App\Admin\TariffAdmin
         arguments: [~, App\Entity\Tariff, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: 'Тариф' }
+            - { name: sonata.admin, manager_type: orm, label: 'Тариф', group: 'Анкета' }
