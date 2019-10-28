@@ -95,7 +95,15 @@ class TariffAdmin extends AbstractAdmin
             ])
             ->add('bank', null, [
                 'label' => self::LABEL_BANK,
-            ]);
+            ])
+            ->add('_action', 'actions', [
+                'label' => 'Действие',
+                'actions' => [
+                    'edit' => [],
+                    'delete' => [],
+                ],
+            ])
+        ;
     }
 
     public function toString($object)

@@ -37,6 +37,13 @@ class BankAdmin extends AbstractAdmin
             ->add('name', null, [
                 'label' => self::LABEL_NAME,
             ])
+            ->add('_action', 'actions', [
+                'label' => 'Действие',
+                'actions' => [
+                    'edit' => [],
+                    'delete' => [],
+                ],
+            ])
         ;
     }
 
