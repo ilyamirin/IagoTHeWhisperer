@@ -29,6 +29,9 @@ class TariffAdmin extends AbstractAdmin
             ->add('yearService', TextareaType::class, [
                 'label' => 'Бизнес-карты (годовое обслуживание)',
             ])
+            ->add('comment', TextareaType::class, [
+                'label' => 'Коментарии',
+            ])
             ->add('bank', EntityType::class, [
                 'label' => 'Банк',
                 'class' => Bank::class,

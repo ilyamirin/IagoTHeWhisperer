@@ -37,6 +37,11 @@ class Tariff
     private $yearService;
 
     /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    private $comment;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Bank", inversedBy="tariffs")
      * @ORM\JoinColumn(name="bank_id", referencedColumnName="id")
      */
@@ -91,6 +96,18 @@ class Tariff
     public function setYearService(string $yearService): self
     {
         $this->yearService = $yearService;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(string $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }

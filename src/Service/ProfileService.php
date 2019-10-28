@@ -28,9 +28,18 @@ class ProfileService
      */
     public function getResult(Profile $profile): array
     {
-        /** @var array $tariffs */
+        /** @var Tariff[] $tariffs */
         $tariffs = $this->tariffRepository->findAll();
 
+        return $this->sortByBank($tariffs);
+    }
+
+    /**
+     * @param Tariff[] $tariffs
+     * @return array
+     */
+    public function sortByBank(array $tariffs)
+    {
         if (0 === count($tariffs)) {
             return [[], []];
         }
