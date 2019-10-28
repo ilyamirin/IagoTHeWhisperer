@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="col-12 mx-auto">
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover text-center">
         <thead>
             <tr>
                 <th>Банк</th>
@@ -13,32 +13,32 @@
         </thead>
         <tbody>
             <tr>
-                <th>Тариф</th>
+                <th class="align-middle">Тариф</th>
                 {% for tariff in tariffs %}
-                    <th>{{ tariff.getName() }}</th>
+                    <th class="align-middle">{{ tariff.getName() }}</th>
                 {% endfor %}
             </tr>
 
             <tr>
-                <th>Стоимость</th>
+                <th class="align-middle">Стоимость</th>
                 {% for tariff in tariffs %}
-                    <td>{{ tariff.getCost() }}</td>
+                    <td class="align-middle">{{ tariff.getCost() }}</td>
                 {% endfor %}
             </tr>
 
-{#            <tr>#}
-{#                <th>Бесплатное обслуживание</th>#}
-{#                <td>Бесплатно</td>#}
-{#                <td>500 руб</td>#}
-{#                <td>100 руб</td>#}
-{#            </tr>#}
+            <tr>
+                <th class="align-middle">Бесплатное обслуживание</th>
+                {% for tariff in tariffs %}
+                    <td class="align-middle">{{ tariff.getFreeService() }}</td>
+                {% endfor %}
+            </tr>
 
-{#            <tr>#}
-{#                <th>Бизнес-карты (годовое обслуживание)</th>#}
-{#                <td>Бесплатно</td>#}
-{#                <td>500 руб</td>#}
-{#                <td>100 руб</td>#}
-{#            </tr>#}
+            <tr>
+                <th class="align-middle">Бизнес-карты (годовое обслуживание)</th>
+                {% for tariff in tariffs %}
+                    <td class="align-middle">{{ tariff.getYearService() }}</td>
+                {% endfor %}
+            </tr>
 
 {#            <tr>#}
 {#                <th>Прием на БК/касса</th>#}

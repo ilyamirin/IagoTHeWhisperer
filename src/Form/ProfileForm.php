@@ -13,9 +13,11 @@ class ProfileForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('answer1', NumberType::class, $this->generateFieldOptions('Сколько платежных поручений в месяц направляете своим контрагентам?'))
-            ->add('answer2', NumberType::class, $this->generateFieldOptions('Сколько средств снимаете по счету в месяц с кассы банка/корпоративных карт?'))
-            ->add('answer3', NumberType::class, $this->generateFieldOptions('Сколько средств вносите в кассу?'))
+            ->add('answer1', NumberType::class, $this->generateFieldOptions('Прием на баковская карта/касса'))
+            ->add('answer2', NumberType::class, $this->generateFieldOptions('Выдача с банковской карты'))
+            ->add('answer3', NumberType::class, $this->generateFieldOptions('Бесплатные платежные поручения'))
+            ->add('answer4', NumberType::class, $this->generateFieldOptions('Перевод на физическое лицо'))
+            ->add('answer5', NumberType::class, $this->generateFieldOptions('Выдача по чеку'))
         ;
     }
 

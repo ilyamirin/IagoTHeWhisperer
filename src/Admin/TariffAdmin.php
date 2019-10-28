@@ -16,12 +16,25 @@ class TariffAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $form)
     {
-        $form->add('name', TextType::class);
-        $form->add('cost', TextareaType::class);
-        $form->add('bank', EntityType::class, [
-            'class' => Bank::class,
-            'choice_label' => 'name',
-        ]);
+        $form
+            ->add('name', TextType::class, [
+                'label' => 'Название',
+            ])
+            ->add('cost', TextareaType::class, [
+                'label' => 'Стоимость',
+            ])
+            ->add('freeService', TextareaType::class, [
+                'label' => 'Бесплатное обслуживание',
+            ])
+            ->add('yearService', TextareaType::class, [
+                'label' => 'Бизнес-карты (годовое обслуживание)',
+            ])
+            ->add('bank', EntityType::class, [
+                'label' => 'Банк',
+                'class' => Bank::class,
+                'choice_label' => 'name',
+            ])
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter)
@@ -31,7 +44,9 @@ class TariffAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $list)
     {
-        $list->add('name');
+        $list
+            ->add('name')
+            ->add('bank');
     }
 
     public function toString($object)

@@ -13,6 +13,12 @@ class Profile
     /** @var int */
     private $answer3;
 
+    /** @var int */
+    private $answer4;
+
+    /** @var int */
+    private $answer5;
+
     /**
      * @param int|null $answer1
      * @param int|null $answer2
@@ -77,5 +83,41 @@ class Profile
     public function getAnswer3(): ?int
     {
         return $this->answer3;
+    }
+
+    /**
+     * @param int|null $answer4
+     * @return Profile
+     */
+    public function setAnswer4(?int $answer4): Profile
+    {
+        $this->answer4 = $answer4;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAnswer4(): ?int
+    {
+        return $this->answer4;
+    }
+
+    /**
+     * @param int|null $answer5
+     * @return Profile
+     */
+    public function setAnswer5(?int $answer5): Profile
+    {
+        $this->answer5 = $answer5;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAnswer5(): ?int
+    {
+        return $this->answer4;
     }
 }

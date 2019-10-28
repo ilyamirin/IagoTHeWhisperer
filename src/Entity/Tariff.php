@@ -27,6 +27,16 @@ class Tariff
     private $cost;
 
     /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    private $freeService;
+
+    /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    private $yearService;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Bank", inversedBy="tariffs")
      * @ORM\JoinColumn(name="bank_id", referencedColumnName="id")
      */
@@ -57,6 +67,30 @@ class Tariff
     public function setCost(string $cost): self
     {
         $this->cost = $cost;
+
+        return $this;
+    }
+
+    public function getFreeService(): ?string
+    {
+        return $this->freeService;
+    }
+
+    public function setFreeService(string $freeService): self
+    {
+        $this->freeService = $freeService;
+
+        return $this;
+    }
+
+    public function getYearService(): ?string
+    {
+        return $this->yearService;
+    }
+
+    public function setYearService(string $yearService): self
+    {
+        $this->yearService = $yearService;
 
         return $this;
     }
