@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Tariff;
+use App\Object\BankResult;
 use App\Object\Profile;
 use App\Repository\TariffRepository;
 
@@ -41,22 +42,16 @@ class ProfileService
         });
 
         $bankName= $tariffs[0]->getBank()->getName();
-        $banks = [[
-            'name' => $bankName,
-            'count' => 0,
-        ]];
+        /** @var BankResult[] $banks */
+        $banks = [new BankResult($bankName)];
 
         /** @var Tariff $tariff */
         foreach ($tariffs as $tariff) {
             if ($bankName !== $tariff->getBank()->getName()) {
                 $bankName = $tariff->getBank()->getName();
-                $tariffsCount = 0;
-                $banks[] = [
-                    'name' => $bankName,
-                    'count' => 1,
-                ];
+                $banks[] = new BankResult($bankName, 1);
             } else {
-                $banks[count($banks) - 1]['count'] += 1;
+                $banks[count($banks) - 1]->incCountTariffs();
             }
         }
 

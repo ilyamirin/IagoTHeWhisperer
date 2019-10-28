@@ -7,7 +7,7 @@
             <tr>
                 <th>Банк</th>
                 {% for bank in banks %}
-                    <th colspan="{{ bank['count'] }}">{{ bank['name'] }}</th>
+                    <th colspan="{{ bank.getCountTariffs() }}">{{ bank.getName() }}</th>
                 {% endfor %}
             </tr>
         </thead>
