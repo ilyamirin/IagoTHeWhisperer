@@ -29,12 +29,28 @@ services:
     # --- Admin ---
     admin.bank:
         class: App\Admin\BankAdmin
-        arguments: [~, App\Entity\Bank, ~]
+        arguments:
+            - ~
+            - App\Entity\Bank
+            - ~
         tags:
             - { name: sonata.admin, manager_type: orm, label: 'Банк', group: 'Анкета' }
 
     admin.tariff:
         class: App\Admin\TariffAdmin
-        arguments: [~, App\Entity\Tariff, ~]
+        arguments:
+            - ~
+            - App\Entity\Tariff
+            - ~
+            - !tagged { tag: 'app.adapter', default_index_method: 'getDefaultIndexName' }
         tags:
             - { name: sonata.admin, manager_type: orm, label: 'Тариф', group: 'Анкета' }
+
+    # --- Adapter ---
+    App\Adapter\AlfaBankAdapter:
+        tags:
+            - { name: 'app.adapter' }
+
+    App\Adapter\OpenAdapter:
+        tags:
+            - { name: 'app.adapter' }

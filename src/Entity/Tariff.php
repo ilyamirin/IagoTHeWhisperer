@@ -42,6 +42,11 @@ class Tariff
     private $comment;
 
     /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    private $adapter;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Bank", inversedBy="tariffs")
      * @ORM\JoinColumn(name="bank_id", referencedColumnName="id")
      */
@@ -108,6 +113,18 @@ class Tariff
     public function setComment(string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getAdapter(): ?string
+    {
+        return $this->adapter;
+    }
+
+    public function setAdapter(string $adapter): self
+    {
+        $this->adapter = $adapter;
 
         return $this;
     }

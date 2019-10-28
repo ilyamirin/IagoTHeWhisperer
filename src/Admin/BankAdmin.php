@@ -11,19 +11,33 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class BankAdmin extends AbstractAdmin
 {
+    const LABEL_NAME = 'Название';
+
     protected function configureFormFields(FormMapper $form)
     {
-        $form->add('name', TextType::class);
+        $form
+            ->add('name', TextType::class, [
+                'label' => self::LABEL_NAME,
+            ])
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('name');
+        $filter
+            ->add('name', null, [
+                'label' => self::LABEL_NAME
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list)
     {
-        $list->add('name');
+        $list
+            ->add('name', null, [
+                'label' => self::LABEL_NAME,
+            ])
+        ;
     }
 
     public function toString($object)
