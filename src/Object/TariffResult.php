@@ -12,10 +12,14 @@ class TariffResult
     /** @var float */
     private $reception;
 
-    public function __construct(Tariff $tariff, float $reception)
+    /** @var float */
+    private $extradition;
+
+    public function __construct(Tariff $tariff, float $reception, float $extradition)
     {
         $this->tariff = $tariff;
         $this->reception = $reception;
+        $this->extradition = $extradition;
     }
 
     public function getTariff(): Tariff
@@ -26,5 +30,10 @@ class TariffResult
     public function getReception(): float
     {
         return $this->reception;
+    }
+
+    public function getExtradition(): float
+    {
+        return $this->extradition;
     }
 }

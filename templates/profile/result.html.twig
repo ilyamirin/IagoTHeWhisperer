@@ -50,7 +50,7 @@
             <tr>
                 <th class="align-middle">Выдача с банковской карты</th>
                 {% for tariff in tariffs %}
-                    <td class="align-middle"></td>
+                    <td class="align-middle">{{ tariff.getExtradition() }}</td>
                 {% endfor %}
             </tr>
 

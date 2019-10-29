@@ -26,6 +26,7 @@ class ProfileService
     public function __construct(TariffRepository $tariffRepository, iterable $adapters)
     {
         $this->tariffRepository = $tariffRepository;
+        /** @var \Traversable $adapters */
         $this->adapters = iterator_to_array($adapters);
     }
 
@@ -41,7 +42,11 @@ class ProfileService
         $tariffsResult = [];
         foreach ($tariffs as $tariff) {
             $adapter = $this->adapters[$tariff->getAdapter()];
-            $tariffsResult[] = new TariffResult($tariff, $adapter->calculateReception($profile->getReception()));
+            $tariffsResult[] = new TariffResult(
+                $tariff,
+                $adapter->calculateReception($profile->getReception()),
+                $adapter->calculateExtradition($profile->getExtradition())
+            );
         }
 
         return $this->sortByBank($tariffsResult);
