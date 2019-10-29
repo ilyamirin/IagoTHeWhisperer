@@ -27,6 +27,9 @@ class TariffAdmin extends AbstractAdmin
     protected $adapters = [];
 
     /** @var array */
+    protected $adapterNames = [];
+
+    /** @var array */
     protected $adapterFields = [];
 
     public function __construct($code, $class, $baseControllerName, iterable $adapters)
@@ -36,7 +39,9 @@ class TariffAdmin extends AbstractAdmin
         foreach ($adapters as $adapter) {
             $className = get_class($adapter);
             $indexName = $className::getDefaultIndexName();
+
             $this->adapters[$indexName] = $className;
+            $this->adapterNames[$className] = $indexName;
         }
 
         foreach ($this->adapters as $key => $adapter) {
@@ -95,6 +100,10 @@ class TariffAdmin extends AbstractAdmin
             ])
             ->add('bank', null, [
                 'label' => self::LABEL_BANK,
+            ])
+            ->add('adapter', 'choice', [
+                'label' => self::LABEL_ADAPTER,
+                'choices' => $this->adapterNames,
             ])
             ->add('_action', 'actions', [
                 'label' => 'Действие',

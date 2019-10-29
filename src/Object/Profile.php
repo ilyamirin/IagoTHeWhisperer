@@ -5,119 +5,133 @@ namespace App\Object;
 class Profile
 {
     /** @var int */
-    private $answer1;
+    // Прием на баковская карта/касса
+    private $reception;
 
     /** @var int */
-    private $answer2;
+    // Выдача с банковской карты
+    private $extradition;
 
     /** @var int */
-    private $answer3;
+    // Бесплатные платежные поручения
+    private $errands;
 
     /** @var int */
-    private $answer4;
+    // Перевод на физическое лицо
+    private $transfers;
 
     /** @var int */
-    private $answer5;
+    // Выдача по чеку
+    private $check;
 
     /**
-     * @param int|null $answer1
-     * @param int|null $answer2
-     * @param int|null $answer3
+     * @param int|null $reception
+     * @param int|null $extradition
+     * @param int|null $errands
+     * @param int|null $transfers
+     * @param int|null $check
      */
-    public function __construct(?int $answer1 = null, ?int $answer2 = null, ?int $answer3 = null)
-    {
-        $this->answer1 = $answer1;
-        $this->answer2 = $answer2;
-        $this->answer3 = $answer3;
+    public function __construct(
+        ?int $reception = null,
+        ?int $extradition = null,
+        ?int $errands = null,
+        ?int $transfers = null,
+        ?int $check = null
+    ) {
+        $this->reception = $reception;
+        $this->extradition = $extradition;
+        $this->errands = $errands;
+        $this->transfers = $transfers;
+        $this->check = $check;
     }
 
     /**
      * @return int|null
      */
-    public function getAnswer1(): ?int
+    public function getReception(): ?int
     {
-        return $this->answer1;
+        return $this->reception;
     }
 
     /**
-     * @param int $answer1
+     * @param int $reception
      * @return Profile
      */
-    public function setAnswer1(?int $answer1): Profile
+    public function setReception(?int $reception): Profile
     {
-        $this->answer1 = $answer1;
+        $this->reception = $reception;
         return $this;
     }
 
     /**
-     * @param int|null $answer2
+     * @param int|null $extradition
      * @return Profile
      */
-    public function setAnswer2(?int $answer2): Profile
+    public function setExtradition(?int $extradition): Profile
     {
-        $this->answer2 = $answer2;
-        return $this;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getAnswer2(): ?int
-    {
-        return $this->answer2;
-    }
-
-    /**
-     * @param int|null $answer3
-     * @return Profile
-     */
-    public function setAnswer3(?int $answer3): Profile
-    {
-        $this->answer3 = $answer3;
+        $this->extradition = $extradition;
         return $this;
     }
 
     /**
      * @return int|null
      */
-    public function getAnswer3(): ?int
+    public function getExtradition(): ?int
     {
-        return $this->answer3;
+        return $this->extradition;
     }
 
     /**
-     * @param int|null $answer4
+     * @param int|null $errands
      * @return Profile
      */
-    public function setAnswer4(?int $answer4): Profile
+    public function setErrands(?int $errands): Profile
     {
-        $this->answer4 = $answer4;
+        $this->errands = $errands;
         return $this;
     }
 
     /**
      * @return int|null
      */
-    public function getAnswer4(): ?int
+    public function getErrands(): ?int
     {
-        return $this->answer4;
+        return $this->errands;
     }
 
     /**
-     * @param int|null $answer5
+     * @param int|null $transfers
      * @return Profile
      */
-    public function setAnswer5(?int $answer5): Profile
+    public function setTransfers(?int $transfers): Profile
     {
-        $this->answer5 = $answer5;
+        $this->transfers = $transfers;
         return $this;
     }
 
     /**
      * @return int|null
      */
-    public function getAnswer5(): ?int
+    public function getTransfers(): ?int
     {
-        return $this->answer4;
+        return $this->transfers;
+    }
+
+    /**
+     * @param int|null $check
+     * @return Profile
+     */
+    public function setCheck(?int $check): Profile
+    {
+        $this->check = $check;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getCheck(): ?int
+    {
+        return $this->transfers;
     }
 }

@@ -47,10 +47,13 @@ services:
             - { name: sonata.admin, manager_type: orm, label: 'Тариф', group: 'Анкета' }
 
     # --- Adapter ---
-    App\Adapter\AlfaBankAdapter:
+
+    # --- Alfa Bank ---
+    App\Adapter\AlfaBank\SimpleOneAdapter:
         tags:
             - { name: 'app.adapter' }
 
-    App\Adapter\OpenAdapter:
+    # --- Open ---
+    App\Adapter\Open\FirstStepAdapter:
         tags:
             - { name: 'app.adapter' }

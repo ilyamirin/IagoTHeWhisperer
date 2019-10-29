@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Tariff;
 use App\Object\BankResult;
 use App\Object\Profile;
+use App\Object\TariffResult;
 use App\Repository\TariffRepository;
 
 class ProfileService
@@ -31,11 +32,16 @@ class ProfileService
         /** @var Tariff[] $tariffs */
         $tariffs = $this->tariffRepository->findAll();
 
-        return $this->sortByBank($tariffs);
+        $tariffsResult = [];
+        foreach ($tariffs as $tariff) {
+            $tariffsResult[] = new TariffResult($tariff, $profile->getReception());
+        }
+
+        return $this->sortByBank($tariffsResult);
     }
 
     /**
-     * @param Tariff[] $tariffs
+     * @param TariffResult[] $tariffs
      * @return array
      */
     public function sortByBank(array $tariffs)
@@ -45,19 +51,19 @@ class ProfileService
         }
 
         usort($tariffs, function ($a, $b) {
-            /** @var Tariff $a */
-            /** @var Tariff $b */
-            return $a->getBank()->getId() <=> $b->getBank()->getId();
+            /** @var TariffResult $a */
+            /** @var TariffResult $b */
+            return $a->getTariff()->getBank()->getId() <=> $b->getTariff()->getBank()->getId();
         });
 
-        $bankName= $tariffs[0]->getBank()->getName();
+        $bankName= $tariffs[0]->getTariff()->getBank()->getName();
         /** @var BankResult[] $banks */
         $banks = [new BankResult($bankName)];
 
-        /** @var Tariff $tariff */
+        /** @var TariffResult $tariff */
         foreach ($tariffs as $tariff) {
-            if ($bankName !== $tariff->getBank()->getName()) {
-                $bankName = $tariff->getBank()->getName();
+            if ($bankName !== $tariff->getTariff()->getBank()->getName()) {
+                $bankName = $tariff->getTariff()->getBank()->getName();
                 $banks[] = new BankResult($bankName, 1);
             } else {
                 $banks[count($banks) - 1]->incCountTariffs();

@@ -15,35 +15,35 @@
             <tr>
                 <th class="align-middle">Тариф</th>
                 {% for tariff in tariffs %}
-                    <th class="align-middle">{{ tariff.getName() }}</th>
+                    <th class="align-middle">{{ tariff.getTariff().getName() }}</th>
                 {% endfor %}
             </tr>
 
             <tr>
                 <th class="align-middle">Стоимость</th>
                 {% for tariff in tariffs %}
-                    <td class="align-middle">{{ tariff.getCost() }}</td>
+                    <td class="align-middle">{{ tariff.getTariff().getCost() }}</td>
                 {% endfor %}
             </tr>
 
             <tr>
                 <th class="align-middle">Бесплатное обслуживание</th>
                 {% for tariff in tariffs %}
-                    <td class="align-middle">{{ tariff.getFreeService() }}</td>
+                    <td class="align-middle">{{ tariff.getTariff().getFreeService() }}</td>
                 {% endfor %}
             </tr>
 
             <tr>
                 <th class="align-middle">Бизнес-карты (годовое обслуживание)</th>
                 {% for tariff in tariffs %}
-                    <td class="align-middle">{{ tariff.getYearService() }}</td>
+                    <td class="align-middle">{{ tariff.getTariff().getYearService() }}</td>
                 {% endfor %}
             </tr>
 
             <tr>
-                <th class="align-middle">Прием на Прием на баковская карта/касса</th>
+                <th class="align-middle">Прием на баковская карта/касса</th>
                 {% for tariff in tariffs %}
-                    <td class="align-middle"></td>
+                    <td class="align-middle">{{ tariff.getReception() }}</td>
                 {% endfor %}
             </tr>
 
@@ -78,7 +78,7 @@
             <tr>
                 <th class="align-middle">Комментарии</th>
                 {% for tariff in tariffs %}
-                    <td class="align-middle">{{ tariff.getComment() }}</td>
+                    <td class="align-middle">{{ tariff.getTariff().getComment() }}</td>
                 {% endfor %}
             </tr>
         </tbody>
