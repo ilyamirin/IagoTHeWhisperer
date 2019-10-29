@@ -2,10 +2,10 @@
 
 namespace App\Adapter\Open;
 
-class FirstStepAdapter extends OpenAdapter
+class OwnBusinessAdapter extends OpenAdapter
 {
     public static function getDefaultIndexName(): string
     {
-        return 'Первый шаг';
+        return 'Свой бизнес';
     }
 }

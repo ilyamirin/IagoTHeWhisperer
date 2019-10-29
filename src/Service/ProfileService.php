@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Adapter\BaseAdapter;
 use App\Entity\Tariff;
 use App\Object\BankResult;
 use App\Object\Profile;
@@ -15,12 +16,17 @@ class ProfileService
      */
     protected $tariffRepository;
 
+    /** @var BaseAdapter[] */
+    protected $adapters;
+
     /**
      * @param TariffRepository $tariffRepository
+     * @param iterable $adapters
      */
-    public function __construct(TariffRepository $tariffRepository)
+    public function __construct(TariffRepository $tariffRepository, iterable $adapters)
     {
         $this->tariffRepository = $tariffRepository;
+        $this->adapters = iterator_to_array($adapters);
     }
 
     /**
@@ -34,7 +40,8 @@ class ProfileService
 
         $tariffsResult = [];
         foreach ($tariffs as $tariff) {
-            $tariffsResult[] = new TariffResult($tariff, $profile->getReception());
+            $adapter = $this->adapters[$tariff->getAdapter()];
+            $tariffsResult[] = new TariffResult($tariff, $adapter->calculateReception($profile->getReception()));
         }
 
         return $this->sortByBank($tariffsResult);

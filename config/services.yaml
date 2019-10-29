@@ -26,6 +26,9 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    App\Service\ProfileService:
+        $adapters: !tagged { tag: 'app.adapter', index_by: 'key' }
+
     # --- Admin ---
     admin.bank:
         class: App\Admin\BankAdmin
@@ -51,9 +54,25 @@ services:
     # --- Alfa Bank ---
     App\Adapter\AlfaBank\SimpleOneAdapter:
         tags:
-            - { name: 'app.adapter' }
+            - { name: 'app.adapter', key: 'App\Adapter\AlfaBank\SimpleOneAdapter' }
 
     # --- Open ---
     App\Adapter\Open\FirstStepAdapter:
         tags:
-            - { name: 'app.adapter' }
+            - { name: 'app.adapter', key: 'App\Adapter\Open\FirstStepAdapter' }
+
+    App\Adapter\Open\FastGrowAdapter:
+        tags:
+            - { name: 'app.adapter', key: 'App\Adapter\Open\FastGrowAdapter' }
+
+    App\Adapter\Open\OwnBusinessAdapter:
+        tags:
+            - { name: 'app.adapter', key: 'App\Adapter\Open\OwnBusinessAdapter' }
+
+    App\Adapter\Open\WholeWorldAdapter:
+        tags:
+            - { name: 'app.adapter', key: 'App\Adapter\Open\WholeWorldAdapter' }
+
+    App\Adapter\Open\OpenOpportunitiesAdapter:
+        tags:
+            - { name: 'app.adapter', key: 'App\Adapter\Open\OpenOpportunitiesAdapter' }
