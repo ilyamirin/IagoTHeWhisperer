@@ -10,6 +10,10 @@ class BankResult
     /** @var int */
     private $countTariffs;
 
+    /**
+     * @param string $name
+     * @param int $countTariffs
+     */
     public function __construct(string $name, int $countTariffs = 0)
     {
         $this->name = $name;
@@ -24,11 +28,17 @@ class BankResult
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function getCountTariffs(): string
     {
         return $this->countTariffs;
     }
 
+    /**
+     * @return void
+     */
     public function incCountTariffs()
     {
         $this->countTariffs++;

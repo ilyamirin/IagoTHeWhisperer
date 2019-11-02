@@ -2,6 +2,7 @@
 
 namespace App\Adapter;
 
+use App\Object\ErrandInfo;
 use App\Object\Range;
 
 abstract class BaseAdapter
@@ -30,8 +31,22 @@ abstract class BaseAdapter
         return 0;
     }
 
+    public function calculateErrands(int $errands): float
+    {
+        $errandInfo = $this->getErrandInfo();
+
+        if ($errands <= $errandInfo->getFreeErrands()) {
+            return 0;
+        }
+
+        return ($errands - $errandInfo->getFreeErrands()) * $errandInfo->getCostErrand();
+    }
+
     public static abstract function getDefaultIndexName(): string;
 
     /** @return Range[] */
     protected abstract function getExtraditionPercents(): array;
+
+    /** @return ErrandInfo  */
+    protected abstract function getErrandInfo(): ErrandInfo;
 }

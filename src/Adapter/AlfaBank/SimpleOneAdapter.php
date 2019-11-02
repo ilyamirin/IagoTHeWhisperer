@@ -2,6 +2,7 @@
 
 namespace App\Adapter\AlfaBank;
 
+use App\Object\ErrandInfo;
 use App\Object\Range;
 
 class SimpleOneAdapter extends AlfaBankAdapter
@@ -25,5 +26,11 @@ class SimpleOneAdapter extends AlfaBankAdapter
             new Range(0, 1500000, 0),
             new Range(1500000, null, 0.1),
         ];
+    }
+
+    /** @return ErrandInfo */
+    protected function getErrandInfo(): ErrandInfo
+    {
+        return new ErrandInfo(1, 0);
     }
 }

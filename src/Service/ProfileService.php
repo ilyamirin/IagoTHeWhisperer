@@ -45,7 +45,8 @@ class ProfileService
             $tariffsResult[] = new TariffResult(
                 $tariff,
                 $adapter->calculateReception($profile->getReception()),
-                $adapter->calculateExtradition($profile->getExtradition())
+                $adapter->calculateExtradition($profile->getExtradition()),
+                $adapter->calculateErrands($profile->getErrands()),
             );
         }
 
