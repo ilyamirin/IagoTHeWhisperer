@@ -9,7 +9,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
+use Sonata\Form\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -20,6 +22,7 @@ class TariffAdmin extends AbstractAdmin
     const LABEL_COST = 'Стоимость';
     const LABEL_FREE_SERVICE = 'Бесплатное обслуживание';
     const LABEL_YEAR_SERVICE = 'Бизнес-карты (годовое обслуживание)';
+    const LABEL_TRANSFERS = 'Перевод на физическое лицо';
     const LABEL_COMMENT = 'Коментарии';
     const LABEL_BANK = 'Банк';
 
@@ -74,6 +77,21 @@ class TariffAdmin extends AbstractAdmin
             ->add('yearService', TextareaType::class, [
                 'label' => self::LABEL_YEAR_SERVICE,
             ])
+            ->add('transferRanges', CollectionType::class,
+                [
+                    'label' => self::LABEL_TRANSFERS,
+                    'by_reference' => false,
+                    'btn_add' => 'Добавить',
+                    'type_options' => [
+                        'delete' => true,
+                    ],
+//                    'pre_bind_data_callback' => ,
+                ],
+                [
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ]
+            )
             ->add('comment', TextareaType::class, [
                 'label' => self::LABEL_COMMENT,
             ])
@@ -113,6 +131,24 @@ class TariffAdmin extends AbstractAdmin
                 ],
             ])
         ;
+    }
+
+    public function prePersist($tariff)
+    {
+        /** @var $tariff Tariff */
+//        $this->preUpdate($tariff);
+        foreach ($tariff->getTransferRanges() as $transferRange) {
+            $transferRange->setTariff($tariff);
+        }
+    }
+
+    public function preUpdate($tariff)
+    {
+        /** @var $tariff Tariff */
+//        $tariff->setTransferRange($tariff->getTransferRanges());
+        foreach ($tariff->getTransferRanges() as $transferRange) {
+            $transferRange->setTariff($tariff);
+        }
     }
 
     public function toString($object)

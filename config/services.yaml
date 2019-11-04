@@ -49,6 +49,15 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: 'Тариф', group: 'Анкета' }
 
+    admin.transfer_range:
+        class: App\Admin\TransferRangeAdmin
+        arguments:
+            - ~
+            - App\Entity\TransferRange
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Перевод на физическое лицо', group: 'Промежутки' }
+
     # --- Adapter ---
 
     # --- Alfa Bank ---

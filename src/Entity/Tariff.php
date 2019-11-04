@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TariffRepository")
@@ -37,6 +39,12 @@ class Tariff
     private $yearService;
 
     /**
+     * @var TransferRange[]
+     * @ORM\OneToMany(targetEntity="TransferRange", mappedBy="tariff", cascade={"all"}, orphanRemoval=true)
+     */
+    private $transferRanges;
+
+    /**
      * @ORM\Column(type="string", length=1000)
      */
     private $comment;
@@ -51,6 +59,11 @@ class Tariff
      * @ORM\JoinColumn(name="bank_id", referencedColumnName="id")
      */
     private $bank;
+
+    public function __construct()
+    {
+        $this->transferRanges = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,6 +118,36 @@ class Tariff
         return $this;
     }
 
+    /** @return TransferRange[] */
+    public function getTransferRanges()
+    {
+        return $this->transferRanges;
+    }
+
+    public function setTransferRange($transferRanges): self
+    {
+        foreach ($transferRanges as $transferRange) {
+            $this->addTransferRange($transferRange);
+        }
+
+        return $this;
+    }
+
+    public function addTransferRange(TransferRange $transferRange): self
+    {
+        $transferRange->setTariff($this);
+        $this->transferRanges->add($transferRange);
+
+        return $this;
+    }
+
+    public function removeTransferRange(TransferRange $transferRange): self
+    {
+        $this->transferRanges->removeElement($transferRange);
+
+        return $this;
+    }
+
     public function getComment(): ?string
     {
         return $this->comment;
@@ -139,5 +182,10 @@ class Tariff
         $this->bank = $bank;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
