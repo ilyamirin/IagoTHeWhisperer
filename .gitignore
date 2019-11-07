@@ -20,4 +20,4 @@
 
 /.idea
 /config/packages/dev/parameters.yaml
-/local.mk.dist
+/local.mk
