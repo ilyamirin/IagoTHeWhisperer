@@ -7,6 +7,7 @@ PHP_BUILD_IMAGE  = $(REGISTRY)/lynx-team/docker/php:7.3
 
 DOCKER_RUN = docker run --rm --init \
 			 -v $(PWD):/opt/workdir \
+			 --net sberbank-profile_default \
 			 -e GOSU=yes \
 			 -e USER_ID=$(USER_ID) \
 			 -e GROUP_ID=$(GROUP_ID)
