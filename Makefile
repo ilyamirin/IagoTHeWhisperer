@@ -12,9 +12,9 @@ PHP ?= php
 COMPOSER ?= composer
 SF_CONSOLE ?= $(PHP) bin/console
 
-install: .env vendor/.dev
+install: .env vendor/.dev assets
 
-project: .env php
+project: .env php assets
 
 .env:
 	$(file >> .env,APP_ENV=$(ENV))
@@ -35,6 +35,9 @@ php: vendor/.prod
 vendor/.prod:
 	@$(COMPOSER) install --no-interaction --optimize-autoloader --no-dev --prefer-dist --no-scripts
 	@touch vendor/.prod
+
+assets:
+	@$(SF_CONSOLE) assets:install --env=$(ENV) --no-debug -n
 
 deploy:
 	@$(SF_CONSOLE) doctrine:migrations:migrate --env=$(ENV) --no-debug -n
