@@ -49,7 +49,7 @@ class TransferRange implements RangeInterface
         return $this->min;
     }
 
-    public function setMin(float $min): self
+    public function setMin(?float $min): self
     {
         $this->min = $min;
 
@@ -61,7 +61,7 @@ class TransferRange implements RangeInterface
         return $this->max;
     }
 
-    public function setMax(float $max): self
+    public function setMax(?float $max): self
     {
         $this->max = $max;
 
