@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use App\Object\RangeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TransferRangeRepository")
  */
-class TransferRange
+class TransferRange implements RangeInterface
 {
     /**
      * @ORM\Id()
@@ -17,12 +18,12 @@ class TransferRange
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $min;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $max;
 
@@ -43,24 +44,24 @@ class TransferRange
         return $this->id;
     }
 
-    public function getMin(): ?int
+    public function getMin(): ?float
     {
         return $this->min;
     }
 
-    public function setMin(int $min): self
+    public function setMin(float $min): self
     {
         $this->min = $min;
 
         return $this;
     }
 
-    public function getMax(): ?int
+    public function getMax(): ?float
     {
         return $this->max;
     }
 
-    public function setMax(int $max): self
+    public function setMax(float $max): self
     {
         $this->max = $max;
 

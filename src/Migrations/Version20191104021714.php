@@ -25,8 +25,8 @@ final class Version20191104021714 extends AbstractMigration
             ->setAutoincrement(true)
             ->setUnsigned(true)
         ;
-        $transferRange->addColumn('min', Type::INTEGER);
-        $transferRange->addColumn('max', Type::INTEGER);
+        $transferRange->addColumn('min', Type::INTEGER)->setNotnull(false);
+        $transferRange->addColumn('max', Type::INTEGER)->setNotnull(false);
         $transferRange->addColumn('value', Type::FLOAT);
         $transferRange->addColumn('tariff_id', Type::INTEGER);
 

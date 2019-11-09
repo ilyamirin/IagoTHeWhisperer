@@ -2,8 +2,10 @@
 
 namespace App\Adapter;
 
+use App\Entity\TransferRange;
 use App\Object\ErrandInfo;
 use App\Object\Range;
+use App\Object\RangeInterface;
 
 abstract class BaseAdapter
 {
@@ -16,19 +18,7 @@ abstract class BaseAdapter
      */
     public function calculateExtradition(int $extradition): float
     {
-        $extraditionPercents = $this->getExtraditionPercents();
-
-        foreach ($extraditionPercents as $range) {
-            if (
-                (null === $range->getMin() and $extradition < $range->getMax()) or
-                (null === $range->getMax() and $extradition >= $range->getMin()) or
-                ($range->getMin() <= $extradition and $extradition < $range->getMax())
-            ) {
-                return $extradition * $range->getValue();
-            }
-        }
-
-        return 0;
+        return $this->calculateRange($this->getExtraditionPercents(), $extradition);
     }
 
     public function calculateErrands(int $errands): float
@@ -40,6 +30,36 @@ abstract class BaseAdapter
         }
 
         return ($errands - $errandInfo->getFreeErrands()) * $errandInfo->getCostErrand();
+    }
+
+    /**
+     * @param TransferRange[] $transfers
+     * @param int $profileTransfers
+     * @return float
+     */
+    public function calculateTransfers($transfers, int $profileTransfers): float
+    {
+        return $this->calculateRange($transfers, $profileTransfers);
+    }
+
+    /**
+     * @param RangeInterface[] $ranges
+     * @param float $value
+     * @return float
+     */
+    protected function calculateRange($ranges, float $value): float
+    {
+        foreach ($ranges as $range) {
+             if (
+                (null === $range->getMin() and $value < $range->getMax()) or
+                (null === $range->getMax() and $value >= $range->getMin()) or
+                ($range->getMin() <= $value and $value < $range->getMax())
+            ) {
+                return $value * (float) $range->getValue();
+            }
+        }
+
+        return 0;
     }
 
     public static abstract function getDefaultIndexName(): string;

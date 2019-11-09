@@ -41,30 +41,30 @@
             </tr>
 
             <tr>
-                <th class="align-middle">Прием на баковская карта/касса</th>
+                <th class="align-middle">Прием на баковская карта/касса (*)</th>
                 {% for tariff in tariffs %}
                     <td class="align-middle">{{ tariff.getReception() }}</td>
                 {% endfor %}
             </tr>
 
             <tr>
-                <th class="align-middle">Выдача с банковской карты</th>
+                <th class="align-middle">Выдача с банковской карты (*)</th>
                 {% for tariff in tariffs %}
                     <td class="align-middle">{{ tariff.getExtradition() }}</td>
                 {% endfor %}
             </tr>
 
             <tr>
-                <th class="align-middle">Бесплатные платежные поручения</th>
+                <th class="align-middle">Бесплатные платежные поручения (*)</th>
                 {% for tariff in tariffs %}
                     <td class="align-middle">{{ tariff.getErrands() }}</td>
                 {% endfor %}
             </tr>
 
             <tr>
-                <th class="align-middle">Перевод на физическое лицо</th>
+                <th class="align-middle">Перевод на физическое лицо (*)</th>
                 {% for tariff in tariffs %}
-                    <td class="align-middle"></td>
+                    <td class="align-middle">{{ tariff.getTransfers() }}</td>
                 {% endfor %}
             </tr>
 
@@ -83,5 +83,9 @@
             </tr>
         </tbody>
     </table>
+
+    <div class="alert alert-primary" role="alert">
+      * пункты рассчитываются на основе веденных данных
+    </div>
 </div>
 {% endblock body %}

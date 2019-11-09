@@ -2,7 +2,7 @@
 
 namespace App\Object;
 
-class Range
+class Range implements RangeInterface
 {
     /** @var float|null */
     private $min;
@@ -10,15 +10,15 @@ class Range
     /** @var float|null */
     private $max;
 
-    /** @var mixed */
+    /** @var float */
     private $value;
 
     /**
      * @param float|null $min
      * @param float|null $max
-     * @param $value
+     * @param float $value
      */
-    public function __construct(?float $min, ?float $max, $value)
+    public function __construct(?float $min, ?float $max, float $value)
     {
         $this->min = $min;
         $this->max = $max;
@@ -42,9 +42,9 @@ class Range
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    public function getValue()
+    public function getValue(): float
     {
         return $this->value;
     }
