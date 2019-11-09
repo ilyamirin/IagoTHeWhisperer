@@ -1,3 +1,2 @@
-# This file is auto-generated during the composer install
 parameters:
-    database.url: 'mysql://lynx:lynx@172.17.0.1:3307/sberbank_profile'
+  database.url: mysql://lynx:zM3ad8wVQVmZqBHr@database:3306/sberbank_profile
