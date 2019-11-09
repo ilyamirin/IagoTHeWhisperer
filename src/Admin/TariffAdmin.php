@@ -23,6 +23,7 @@ class TariffAdmin extends AbstractAdmin
     const LABEL_FREE_SERVICE = 'Бесплатное обслуживание';
     const LABEL_YEAR_SERVICE = 'Бизнес-карты (годовое обслуживание)';
     const LABEL_TRANSFERS = 'Перевод на физическое лицо';
+    const LABEL_CHECK = 'Выдача по чеку';
     const LABEL_COMMENT = 'Коментарии';
     const LABEL_BANK = 'Банк';
 
@@ -85,7 +86,20 @@ class TariffAdmin extends AbstractAdmin
                     'type_options' => [
                         'delete' => true,
                     ],
-//                    'pre_bind_data_callback' => ,
+                ],
+                [
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ]
+            )
+            ->add('checkRanges', CollectionType::class,
+                [
+                    'label' => self::LABEL_CHECK,
+                    'by_reference' => false,
+                    'btn_add' => 'Добавить',
+                    'type_options' => [
+                        'delete' => true,
+                    ],
                 ],
                 [
                     'edit' => 'inline',

@@ -47,7 +47,8 @@ class ProfileService
                 $adapter->calculateReception($profile->getReception()),
                 $adapter->calculateExtradition($profile->getExtradition()),
                 $adapter->calculateErrands($profile->getErrands()),
-                $adapter->calculateTransfers($tariff->getTransferRanges(), $profile->getTransfers())
+                $adapter->calculateTransfers($tariff->getTransferRanges(), $profile->getTransfers()),
+                $adapter->calculateCheck($tariff->getCheckRanges(), $profile->getCheck())
             );
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Adapter;
 
+use App\Entity\CheckRange;
 use App\Entity\TransferRange;
 use App\Object\ErrandInfo;
 use App\Object\Range;
@@ -40,6 +41,16 @@ abstract class BaseAdapter
     public function calculateTransfers($transfers, int $profileTransfers): float
     {
         return $this->calculateRange($transfers, $profileTransfers);
+    }
+
+    /**
+     * @param CheckRange[] $checks
+     * @param float $profileCheck
+     * @return float
+     */
+    public function calculateCheck($checks, float $profileCheck): float
+    {
+        return $this->calculateRange($checks, $profileCheck);
     }
 
     /**

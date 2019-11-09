@@ -45,6 +45,12 @@ class Tariff
     private $transferRanges;
 
     /**
+     * @var CheckRange[]
+     * @ORM\OneToMany(targetEntity="CheckRange", mappedBy="tariff", cascade={"all"}, orphanRemoval=true)
+     */
+    private $checkRanges;
+
+    /**
      * @ORM\Column(type="string", length=1000)
      */
     private $comment;
@@ -124,7 +130,7 @@ class Tariff
         return $this->transferRanges;
     }
 
-    public function setTransferRange($transferRanges): self
+    public function setTransferRanges($transferRanges): self
     {
         foreach ($transferRanges as $transferRange) {
             $this->addTransferRange($transferRange);
@@ -144,6 +150,35 @@ class Tariff
     public function removeTransferRange(TransferRange $transferRange): self
     {
         $this->transferRanges->removeElement($transferRange);
+
+        return $this;
+    }
+
+    public function getCheckRanges()
+    {
+        return $this->checkRanges;
+    }
+
+    public function setCheckRanges($checkRanges): self
+    {
+        foreach ($checkRanges as $checkRange) {
+            $this->addCheckRange($checkRange);
+        }
+
+        return $this;
+    }
+
+    public function addCheckRange(CheckRange $checkRange): self
+    {
+        $checkRange->setTariff($this);
+        $this->checkRanges->add($checkRange);
+
+        return $this;
+    }
+
+    public function removeCheckRange(CheckRange $checkRange): self
+    {
+        $this->checkRanges->removeElement($checkRange);
 
         return $this;
     }

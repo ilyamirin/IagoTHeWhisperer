@@ -58,6 +58,15 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: 'Перевод на физическое лицо', group: 'Промежутки' }
 
+    admin.check_range:
+        class: App\Admin\CheckRangeAdmin
+        arguments:
+            - ~
+            - App\Entity\CheckRange
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Выдача по чеку', group: 'Промежутки' }
+
     # --- Adapter ---
 
     # --- Alfa Bank ---

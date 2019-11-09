@@ -21,20 +21,31 @@ class TariffResult
     /** @var float */
     private $transfers;
 
+    /** @var float */
+    private $check;
+
     /**
      * @param Tariff $tariff
      * @param float $reception
      * @param float $extradition
      * @param float $errands
      * @param float $transfers
+     * @param float $check
      */
-    public function __construct(Tariff $tariff, float $reception, float $extradition, float $errands, float $transfers)
-    {
+    public function __construct(
+        Tariff $tariff,
+        float $reception,
+        float $extradition,
+        float $errands,
+        float $transfers,
+        float $check
+    ) {
         $this->tariff = $tariff;
         $this->reception = $reception;
         $this->extradition = $extradition;
         $this->errands = $errands;
         $this->transfers = $transfers;
+        $this->check = $check;
     }
 
     /**
@@ -72,5 +83,10 @@ class TariffResult
     public function getTransfers(): float
     {
         return $this->transfers;
+    }
+
+    public function getCheck(): float
+    {
+        return $this->check;
     }
 }
