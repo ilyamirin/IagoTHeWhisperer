@@ -69,7 +69,7 @@
             </tr>
 
             <tr>
-                <th class="align-middle">Выдача по чеку</th>
+                <th class="align-middle">Выдача по чеку (*)</th>
                 {% for tariff in tariffs %}
                     <td class="align-middle">{{ tariff.getCheck() }}</td>
                 {% endfor %}
