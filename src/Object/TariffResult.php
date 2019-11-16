@@ -89,4 +89,9 @@ class TariffResult
     {
         return $this->check;
     }
+
+    public function getCost(): float
+    {
+        return $this->reception + $this->extradition + $this->errands + $this->transfers + $this->check;
+    }
 }

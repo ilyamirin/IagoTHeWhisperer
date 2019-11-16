@@ -13,7 +13,12 @@ use App\Object\TariffResult;
 
 abstract class BaseAdapter
 {
-    public function calculate(Tariff $tariff, Profile $profile)
+    /**
+     * @param Tariff $tariff
+     * @param Profile $profile
+     * @return TariffResult
+     */
+    public function calculate(Tariff $tariff, Profile $profile): TariffResult
     {
         return new TariffResult(
             $tariff,
@@ -24,6 +29,7 @@ abstract class BaseAdapter
             $this->calculateCheck($tariff->getCheckRanges(), $profile->getCheck())
         );
     }
+
     /**
      * @param int $reception
      * @return float

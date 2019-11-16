@@ -41,42 +41,40 @@ class ProfileService
 
         $tariffsResult = [];
         foreach ($tariffs as $tariff) {
-            $tariffsResult[] = $this->adapters[$tariff->getAdapter()]->calculate($tariff, $profile);
+            $tariffsResult[$tariff->getBank()->getId()][] =
+                $this->adapters[$tariff->getAdapter()]->calculate($tariff, $profile);
         }
 
-        return $this->sortByBank($tariffsResult);
+        return $this->filter($tariffsResult);
     }
 
     /**
-     * @param TariffResult[] $tariffs
-     * @return array
+     * @param $tariffs
+     * @return TariffResult[]
      */
-    public function sortByBank(array $tariffs)
+    public function filter(array $tariffs): array
     {
         if (0 === count($tariffs)) {
             return [[], []];
         }
 
-        usort($tariffs, function ($a, $b) {
-            /** @var TariffResult $a */
-            /** @var TariffResult $b */
-            return $a->getTariff()->getBank()->getId() <=> $b->getTariff()->getBank()->getId();
-        });
+        $result = [];
 
-        $bankName= $tariffs[0]->getTariff()->getBank()->getName();
-        /** @var BankResult[] $banks */
-        $banks = [new BankResult($bankName)];
-
-        /** @var TariffResult $tariff */
-        foreach ($tariffs as $tariff) {
-            if ($bankName !== $tariff->getTariff()->getBank()->getName()) {
-                $bankName = $tariff->getTariff()->getBank()->getName();
-                $banks[] = new BankResult($bankName, 1);
-            } else {
-                $banks[count($banks) - 1]->incCountTariffs();
-            }
+        /** @var TariffResult[]  $bank */
+        foreach ($tariffs as $bank) {
+            $result[] = array_reduce($bank, function($a, $b) {
+                /** @var TariffResult $a */
+                /** @var TariffResult $b */
+                return null !== $a && $a->getCost() <= $b->getCost() ? $a : $b;
+            });
         }
 
-        return [$banks, $tariffs];
+        usort($result, function ($a, $b) {
+            /** @var TariffResult $a */
+            /** @var TariffResult $b */
+            return $a->getCost() <=> $b->getCost();
+        });
+
+        return $result;
     }
 }

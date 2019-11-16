@@ -32,10 +32,9 @@ class ProfileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Profile $profile */
             $profile = $form->getData();
-            [$banks, $tariffs] = $profileService->getResult($profile);
+            $tariffs = $profileService->getResult($profile);
 
             return $this->render('profile/result.html.twig', [
-                'banks' => $banks,
                 'tariffs' => $tariffs,
             ]);
         }
