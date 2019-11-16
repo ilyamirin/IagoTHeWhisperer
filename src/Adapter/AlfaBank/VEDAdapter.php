@@ -19,18 +19,6 @@ class VEDAdapter extends AlfaBankAdapter
         return 'ВЭД +';
     }
 
-    /** @return Range[] */
-    protected function getExtraditionPercents(): array
-    {
-        return [
-            new Range(0, 300000, 0.0075),
-            new Range(300000, 800000, 0.015),
-            new Range(800000, 2000000, 0.025),
-            new Range(2000000, 4000000, 0.04),
-            new Range(4000000, null, 0.1),
-        ];
-    }
-
     /** @return ErrandInfo */
     protected function getErrandInfo(): ErrandInfo
     {

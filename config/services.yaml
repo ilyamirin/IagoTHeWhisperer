@@ -49,6 +49,15 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: 'Тариф', group: 'Анкета' }
 
+    admin.extradition_range:
+        class: App\Admin\ExtraditionRangeAdmin
+        arguments:
+            - ~
+            - App\Entity\ExtraditionRange
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Выдача с банковской карты', group: 'Промежутки' }
+
     admin.transfer_range:
         class: App\Admin\TransferRangeAdmin
         arguments:

@@ -3,26 +3,49 @@
 namespace App\Adapter;
 
 use App\Entity\CheckRange;
+use App\Entity\ExtraditionRange;
+use App\Entity\Tariff;
 use App\Entity\TransferRange;
 use App\Object\ErrandInfo;
-use App\Object\Range;
+use App\Object\Profile;
 use App\Object\RangeInterface;
+use App\Object\TariffResult;
 
 abstract class BaseAdapter
 {
-    public abstract function calculateReception(int $reception): float;
+    public function calculate(Tariff $tariff, Profile $profile)
+    {
+        return new TariffResult(
+            $tariff,
+            $this->calculateReception($profile->getReception()),
+            $this->calculateExtradition($tariff->getExtraditionRanges(), $profile->getExtradition()),
+            $this->calculateErrands($profile->getErrands()),
+            $this->calculateTransfers($tariff->getTransferRanges(), $profile->getTransfers()),
+            $this->calculateCheck($tariff->getCheckRanges(), $profile->getCheck())
+        );
+    }
+    /**
+     * @param int $reception
+     * @return float
+     */
+    protected abstract function calculateReception(int $reception): float;
 
     /**
      * Check ranges as [min, max)
+     * @param ExtraditionRange[] $extraditions
      * @param int $extradition
      * @return float
      */
-    public function calculateExtradition(int $extradition): float
+    protected function calculateExtradition($extraditions, int $extradition): float
     {
-        return $this->calculateRange($this->getExtraditionPercents(), $extradition);
+        return $this->calculateRange($extraditions, $extradition);
     }
 
-    public function calculateErrands(int $errands): float
+    /**
+     * @param int $errands
+     * @return float
+     */
+    protected function calculateErrands(int $errands): float
     {
         $errandInfo = $this->getErrandInfo();
 
@@ -38,7 +61,7 @@ abstract class BaseAdapter
      * @param int $profileTransfers
      * @return float
      */
-    public function calculateTransfers($transfers, int $profileTransfers): float
+    protected function calculateTransfers($transfers, int $profileTransfers): float
     {
         return $this->calculateRange($transfers, $profileTransfers);
     }
@@ -48,7 +71,7 @@ abstract class BaseAdapter
      * @param float $profileCheck
      * @return float
      */
-    public function calculateCheck($checks, float $profileCheck): float
+    protected function calculateCheck($checks, float $profileCheck): float
     {
         return $this->calculateRange($checks, $profileCheck);
     }
@@ -73,10 +96,10 @@ abstract class BaseAdapter
         return 0;
     }
 
+    /**
+     * @return string
+     */
     public static abstract function getDefaultIndexName(): string;
-
-    /** @return Range[] */
-    protected abstract function getExtraditionPercents(): array;
 
     /** @return ErrandInfo  */
     protected abstract function getErrandInfo(): ErrandInfo;

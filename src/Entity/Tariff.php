@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 
@@ -39,6 +40,12 @@ class Tariff
     private $yearService;
 
     /**
+     * @var ExtraditionRange[]
+     * @ORM\OneToMany(targetEntity="ExtraditionRange", mappedBy="tariff", cascade={"all"}, orphanRemoval=true)
+     */
+    private $extraditionRanges;
+
+    /**
      * @var TransferRange[]
      * @ORM\OneToMany(targetEntity="TransferRange", mappedBy="tariff", cascade={"all"}, orphanRemoval=true)
      */
@@ -68,7 +75,9 @@ class Tariff
 
     public function __construct()
     {
+        $this->extraditionRanges = new ArrayCollection();
         $this->transferRanges = new ArrayCollection();
+        $this->checkRanges = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,7 +133,38 @@ class Tariff
         return $this;
     }
 
-    /** @return TransferRange[] */
+    /**
+     * @return Collection|ExtraditionRange[]
+     */
+    public function getExtraditionRanges(): Collection
+    {
+        return $this->extraditionRanges;
+    }
+
+    public function addExtraditionRange(ExtraditionRange $extraditionRange): self
+    {
+        if (!$this->extraditionRanges->contains($extraditionRange)) {
+            $this->extraditionRanges[] = $extraditionRange;
+            $extraditionRange->setTariff($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExtraditionRange(ExtraditionRange $extraditionRange): self
+    {
+        if ($this->extraditionRanges->contains($extraditionRange)) {
+            $this->extraditionRanges->removeElement($extraditionRange);
+            // set the owning side to null (unless already changed)
+            if ($extraditionRange->getTariff() === $this) {
+                $extraditionRange->setTariff(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /** @return Collection|TransferRange[] */
     public function getTransferRanges()
     {
         return $this->transferRanges;
@@ -154,6 +194,9 @@ class Tariff
         return $this;
     }
 
+    /**
+     * @return Collection|CheckRange[]
+     */
     public function getCheckRanges()
     {
         return $this->checkRanges;

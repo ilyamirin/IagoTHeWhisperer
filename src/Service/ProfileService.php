@@ -41,15 +41,7 @@ class ProfileService
 
         $tariffsResult = [];
         foreach ($tariffs as $tariff) {
-            $adapter = $this->adapters[$tariff->getAdapter()];
-            $tariffsResult[] = new TariffResult(
-                $tariff,
-                $adapter->calculateReception($profile->getReception()),
-                $adapter->calculateExtradition($profile->getExtradition()),
-                $adapter->calculateErrands($profile->getErrands()),
-                $adapter->calculateTransfers($tariff->getTransferRanges(), $profile->getTransfers()),
-                $adapter->calculateCheck($tariff->getCheckRanges(), $profile->getCheck())
-            );
+            $tariffsResult[] = $this->adapters[$tariff->getAdapter()]->calculate($tariff, $profile);
         }
 
         return $this->sortByBank($tariffsResult);

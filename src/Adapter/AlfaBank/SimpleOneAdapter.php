@@ -19,15 +19,6 @@ class SimpleOneAdapter extends AlfaBankAdapter
         return 'Просто 1%';
     }
 
-    /** @return Range[] */
-    protected function getExtraditionPercents(): array
-    {
-        return [
-            new Range(0, 1500000, 0),
-            new Range(1500000, null, 0.1),
-        ];
-    }
-
     /** @return ErrandInfo */
     protected function getErrandInfo(): ErrandInfo
     {
