@@ -1,2 +1,2 @@
 parameters:
-  database.url: mysql://lynx:zM3ad8wVQVmZqBHr@database:3306/sberbank_profile
+  database.url: '%env(string:DATABASE_URL)%'

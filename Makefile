@@ -20,6 +20,7 @@ project: .env php assets
 	$(file >> .env,APP_ENV=$(ENV))
 	$(file >> .env,APP_DEBUG=true)
 	$(file >> .env,APP_SECRET=4fe5a1a6488c591a4750fac8da20daeb)
+	$(file >> .env,DATABASE_URL=mysql://login:pass@127.0.0.1:3306/sberbank_profile)
 	$(file >> .env,DOCKER_USER_ID=$(USER_ID))
 	$(file >> .env,DOCKER_GROUP_ID=$(GROUP_ID))
 	$(file >> .env,DOCKER_IP=$(DOCKER_IP))
