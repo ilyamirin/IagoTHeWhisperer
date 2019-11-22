@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Object\RangeInterface;
+use App\Model\RangeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

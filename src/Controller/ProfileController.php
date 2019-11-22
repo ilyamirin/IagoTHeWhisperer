@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ProfileForm;
-use App\Object\Profile;
+use App\Model\Profile;
 use App\Service\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Object;
+namespace App\Model;
 
 class Range implements RangeInterface
 {

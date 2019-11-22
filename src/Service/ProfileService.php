@@ -4,9 +4,9 @@ namespace App\Service;
 
 use App\Adapter\BaseAdapter;
 use App\Entity\Tariff;
-use App\Object\BankResult;
-use App\Object\Profile;
-use App\Object\TariffResult;
+use App\Model\BankResult;
+use App\Model\Profile;
+use App\Model\TariffResult;
 use App\Repository\TariffRepository;
 
 class ProfileService

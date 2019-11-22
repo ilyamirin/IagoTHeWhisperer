@@ -3,7 +3,7 @@
 namespace App\Adapter\Open;
 
 use App\Adapter\BaseAdapter;
-use App\Object\Range;
+use App\Model\Range;
 
 abstract class OpenAdapter extends BaseAdapter
 {

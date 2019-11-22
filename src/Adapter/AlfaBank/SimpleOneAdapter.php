@@ -2,8 +2,8 @@
 
 namespace App\Adapter\AlfaBank;
 
-use App\Object\ErrandInfo;
-use App\Object\Range;
+use App\Model\ErrandInfo;
+use App\Model\Range;
 
 class SimpleOneAdapter extends AlfaBankAdapter
 {

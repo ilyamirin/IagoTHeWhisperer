@@ -6,10 +6,10 @@ use App\Entity\CheckRange;
 use App\Entity\ExtraditionRange;
 use App\Entity\Tariff;
 use App\Entity\TransferRange;
-use App\Object\ErrandInfo;
-use App\Object\Profile;
-use App\Object\RangeInterface;
-use App\Object\TariffResult;
+use App\Model\ErrandInfo;
+use App\Model\Profile;
+use App\Model\RangeInterface;
+use App\Model\TariffResult;
 
 abstract class BaseAdapter
 {

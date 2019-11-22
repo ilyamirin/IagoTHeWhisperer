@@ -2,7 +2,7 @@
 
 namespace App\Adapter\Open;
 
-use App\Object\ErrandInfo;
+use App\Model\ErrandInfo;
 
 class FirstStepAdapter extends OpenAdapter
 {
