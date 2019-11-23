@@ -2,8 +2,8 @@
 
 namespace App\Adapter\AlfaBank;
 
-use App\Adapter\BaseAdapter;
+use App\Adapter\AbstractBaseAdapter;
 
-abstract class AlfaBankAdapter extends BaseAdapter
+abstract class AlfaBankAdapter extends AbstractBaseAdapter
 {
 }

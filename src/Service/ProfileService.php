@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Adapter\BaseAdapter;
+use App\Adapter\AbstractBaseAdapter;
 use App\Entity\Tariff;
 use App\Model\BankResult;
 use App\Model\Profile;
@@ -16,7 +16,7 @@ class ProfileService
      */
     protected $tariffRepository;
 
-    /** @var BaseAdapter[] */
+    /** @var AbstractBaseAdapter[] */
     protected $adapters;
 
     /**

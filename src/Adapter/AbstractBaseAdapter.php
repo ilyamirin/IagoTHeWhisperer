@@ -7,13 +7,11 @@ use App\Entity\ExtraditionRange;
 use App\Entity\ReceptionRange;
 use App\Entity\Tariff;
 use App\Entity\TransferRange;
-use App\Model\ErrandInfo;
 use App\Model\Profile;
 use App\Model\RangeInterface;
 use App\Model\TariffResult;
-use Doctrine\Common\Collections\Collection;
 
-abstract class BaseAdapter
+abstract class AbstractBaseAdapter
 {
     /**
      * @param Tariff $tariff

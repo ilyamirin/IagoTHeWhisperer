@@ -212,7 +212,7 @@ class Tariff
         return $this;
     }
 
-    public function getFreeErrandsAmount(): int
+    public function getFreeErrandsAmount(): ?int
     {
         return $this->freeErrandsAmount;
     }
@@ -224,7 +224,7 @@ class Tariff
         return $this;
     }
 
-    public function getErrandCost(): float
+    public function getErrandCost(): ?float
     {
         return $this->errandCost;
     }

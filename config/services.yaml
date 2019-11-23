@@ -88,43 +88,6 @@ services:
     # --- Adapter ---
 
     # --- Alfa Bank ---
-    App\Adapter\AlfaBank\AllNeedAdapter:
+    App\Adapter\CommonAdapter:
         tags:
-            - { name: 'app.adapter', key: 'App\Adapter\AlfaBank\AllNeedAdapter' }
-
-    App\Adapter\AlfaBank\GoodChoiceAdapter:
-        tags:
-            - { name: 'app.adapter', key: 'App\Adapter\AlfaBank\GoodChoiceAdapter' }
-
-    App\Adapter\AlfaBank\OnStartAdapter:
-        tags:
-            - { name: 'app.adapter', key: 'App\Adapter\AlfaBank\OnStartAdapter' }
-
-    App\Adapter\AlfaBank\SimpleOneAdapter:
-        tags:
-            - { name: 'app.adapter', key: 'App\Adapter\AlfaBank\SimpleOneAdapter' }
-
-    App\Adapter\AlfaBank\VEDAdapter:
-        tags:
-            - { name: 'app.adapter', key: 'App\Adapter\AlfaBank\VEDAdapter' }
-
-    # --- Open ---
-    App\Adapter\Open\FastGrowAdapter:
-        tags:
-            - { name: 'app.adapter', key: 'App\Adapter\Open\FastGrowAdapter' }
-
-    App\Adapter\Open\FirstStepAdapter:
-        tags:
-            - { name: 'app.adapter', key: 'App\Adapter\Open\FirstStepAdapter' }
-
-    App\Adapter\Open\OpenOpportunitiesAdapter:
-        tags:
-            - { name: 'app.adapter', key: 'App\Adapter\Open\OpenOpportunitiesAdapter' }
-
-    App\Adapter\Open\OwnBusinessAdapter:
-        tags:
-            - { name: 'app.adapter', key: 'App\Adapter\Open\OwnBusinessAdapter' }
-
-    App\Adapter\Open\WholeWorldAdapter:
-        tags:
-            - { name: 'app.adapter', key: 'App\Adapter\Open\WholeWorldAdapter' }
+            - { name: 'app.adapter', key: 'App\Adapter\CommonAdapter' }
