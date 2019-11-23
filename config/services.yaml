@@ -49,6 +49,15 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: 'Тариф', group: 'Анкета' }
 
+    admin.reception_range:
+        class: App\Admin\ReceptionRangeAdmin
+        arguments:
+            - ~
+            - App\Entity\ReceptionRange
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Прием на баковская карта/касса', group: 'Промежутки' }
+
     admin.extradition_range:
         class: App\Admin\ExtraditionRangeAdmin
         arguments:

@@ -40,6 +40,12 @@ class Tariff
     private $yearService;
 
     /**
+     * @var ReceptionRange[]
+     * @ORM\OneToMany(targetEntity="ReceptionRange", mappedBy="tariff", cascade={"all"}, orphanRemoval=true)
+     */
+    private $receptionRanges;
+
+    /**
      * @var ExtraditionRange[]
      * @ORM\OneToMany(targetEntity="ExtraditionRange", mappedBy="tariff", cascade={"all"}, orphanRemoval=true)
      */
@@ -75,6 +81,7 @@ class Tariff
 
     public function __construct()
     {
+        $this->receptionRanges = new ArrayCollection();
         $this->extraditionRanges = new ArrayCollection();
         $this->transferRanges = new ArrayCollection();
         $this->checkRanges = new ArrayCollection();
@@ -133,6 +140,36 @@ class Tariff
         return $this;
     }
 
+    /** @return Collection|ReceptionRange[] */
+    public function getReceptionRanges(): Collection
+    {
+        return $this->receptionRanges;
+    }
+
+    public function setReceptionRanges(Collection $receptionRanges): self
+    {
+        foreach ($receptionRanges as $receptionRange) {
+            $this->addReceptionRange($receptionRange);
+        }
+
+        return $this;
+    }
+
+    public function addReceptionRange(ReceptionRange $receptionRange): self
+    {
+        $receptionRange->setTariff($this);
+        $this->receptionRanges->add($receptionRange);
+
+        return $this;
+    }
+
+    public function removeReceptionRange(ReceptionRange $receptionRange): self
+    {
+        $this->receptionRanges->removeElement($receptionRange);
+
+        return $this;
+    }
+
     /**
      * @return Collection|ExtraditionRange[]
      */
@@ -141,36 +178,37 @@ class Tariff
         return $this->extraditionRanges;
     }
 
+    public function setExtraditionRanges(Collection $extraditionRanges): self
+    {
+        foreach ($extraditionRanges as $extraditionRange) {
+            $this->addExtraditionRange($extraditionRange);
+        }
+
+        return $this;
+    }
+
     public function addExtraditionRange(ExtraditionRange $extraditionRange): self
     {
-        if (!$this->extraditionRanges->contains($extraditionRange)) {
-            $this->extraditionRanges[] = $extraditionRange;
-            $extraditionRange->setTariff($this);
-        }
+        $extraditionRange->setTariff($this);
+        $this->extraditionRanges->add($extraditionRange);
 
         return $this;
     }
 
     public function removeExtraditionRange(ExtraditionRange $extraditionRange): self
     {
-        if ($this->extraditionRanges->contains($extraditionRange)) {
-            $this->extraditionRanges->removeElement($extraditionRange);
-            // set the owning side to null (unless already changed)
-            if ($extraditionRange->getTariff() === $this) {
-                $extraditionRange->setTariff(null);
-            }
-        }
+        $this->extraditionRanges->removeElement($extraditionRange);
 
         return $this;
     }
 
     /** @return Collection|TransferRange[] */
-    public function getTransferRanges()
+    public function getTransferRanges(): Collection
     {
         return $this->transferRanges;
     }
 
-    public function setTransferRanges($transferRanges): self
+    public function setTransferRanges(Collection $transferRanges): self
     {
         foreach ($transferRanges as $transferRange) {
             $this->addTransferRange($transferRange);
@@ -197,7 +235,7 @@ class Tariff
     /**
      * @return Collection|CheckRange[]
      */
-    public function getCheckRanges()
+    public function getCheckRanges(): Collection
     {
         return $this->checkRanges;
     }

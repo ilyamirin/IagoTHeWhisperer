@@ -4,12 +4,14 @@ namespace App\Adapter;
 
 use App\Entity\CheckRange;
 use App\Entity\ExtraditionRange;
+use App\Entity\ReceptionRange;
 use App\Entity\Tariff;
 use App\Entity\TransferRange;
 use App\Model\ErrandInfo;
 use App\Model\Profile;
 use App\Model\RangeInterface;
 use App\Model\TariffResult;
+use Doctrine\Common\Collections\Collection;
 
 abstract class BaseAdapter
 {
@@ -22,7 +24,7 @@ abstract class BaseAdapter
     {
         return new TariffResult(
             $tariff,
-            $this->calculateReception($profile->getReception()),
+            $this->calculateReception($tariff->getReceptionRanges(), $profile->getReception()),
             $this->calculateExtradition($tariff->getExtraditionRanges(), $profile->getExtradition()),
             $this->calculateErrands($profile->getErrands()),
             $this->calculateTransfers($tariff->getTransferRanges(), $profile->getTransfers()),
@@ -31,10 +33,22 @@ abstract class BaseAdapter
     }
 
     /**
+     * @return string
+     */
+    public static abstract function getDefaultIndexName(): string;
+
+    /** @return ErrandInfo  */
+    protected abstract function getErrandInfo(): ErrandInfo;
+
+    /**
+     * @param ReceptionRange[] $receptions
      * @param int $reception
      * @return float
      */
-    protected abstract function calculateReception(int $reception): float;
+    protected function calculateReception($receptions, int $reception): float
+    {
+        return $this->calculateRange($receptions, $reception);
+    }
 
     /**
      * Check ranges as [min, max)
@@ -101,12 +115,4 @@ abstract class BaseAdapter
 
         return 0;
     }
-
-    /**
-     * @return string
-     */
-    public static abstract function getDefaultIndexName(): string;
-
-    /** @return ErrandInfo  */
-    protected abstract function getErrandInfo(): ErrandInfo;
 }

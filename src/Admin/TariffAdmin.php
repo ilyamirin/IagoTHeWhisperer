@@ -21,6 +21,7 @@ class TariffAdmin extends AbstractAdmin
     const LABEL_COST = 'Стоимость';
     const LABEL_FREE_SERVICE = 'Бесплатное обслуживание';
     const LABEL_YEAR_SERVICE = 'Бизнес-карты (годовое обслуживание)';
+    const LABEL_RECEPTION = 'Прием на баковская карта/касса';
     const LABEL_EXTRADITION = 'Выдача с банковской карты';
     const LABEL_TRANSFERS = 'Перевод на физическое лицо';
     const LABEL_CHECK = 'Выдача по чеку';
@@ -81,6 +82,20 @@ class TariffAdmin extends AbstractAdmin
             ->add('yearService', TextareaType::class, [
                 'label' => self::LABEL_YEAR_SERVICE,
             ])
+            ->add('receptionRanges', CollectionType::class,
+                [
+                    'label' => self::LABEL_RECEPTION,
+                    'by_reference' => false,
+                    'btn_add' => 'Добавить',
+                    'type_options' => [
+                        'delete' => true,
+                    ],
+                ],
+                [
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ]
+            )
             ->add('extraditionRanges', CollectionType::class,
                 [
                     'label' => self::LABEL_EXTRADITION,
