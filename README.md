@@ -2,7 +2,7 @@
 
 ## Requirements
 
-1. PHP >= 7.1
+1. PHP >= 7.1.3
 2. Nginx
 3. MySQL database (e.g. MariaDB)
 
@@ -18,6 +18,12 @@
     DATABASE_URL=<url to database>
     ```
 
-4. Run `make deploy` to make migrations
+3. Run `make deploy` to make migrations
 
-5. Example [nginx config](docker/default.conf)
+4. Example [nginx config](docker/default.conf)
+
+5. Fix bug in Symfony project
+    * Open file `vendor/sonata-project/admin-bundle/src/Action/AppendFormFieldElementAction.php`
+    * In line 58 change `$code = $request->get('code');` to `$code = $request->get('?code');`
+    
+6. Last dump of Data Base in `dumps/last.sql`
