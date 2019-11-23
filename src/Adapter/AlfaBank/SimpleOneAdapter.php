@@ -11,10 +11,4 @@ class SimpleOneAdapter extends AlfaBankAdapter
     {
         return 'Просто 1%';
     }
-
-    /** @return ErrandInfo */
-    protected function getErrandInfo(): ErrandInfo
-    {
-        return new ErrandInfo(1, 0);
-    }
 }

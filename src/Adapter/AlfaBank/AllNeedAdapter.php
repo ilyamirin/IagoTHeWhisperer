@@ -11,10 +11,4 @@ class AllNeedAdapter extends AlfaBankAdapter
     {
         return 'Все, что надо';
     }
-
-    /** @return ErrandInfo */
-    protected function getErrandInfo(): ErrandInfo
-    {
-        return new ErrandInfo(1, 0);
-    }
 }

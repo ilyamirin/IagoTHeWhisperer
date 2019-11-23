@@ -10,10 +10,4 @@ class WholeWorldAdapter extends OpenAdapter
     {
         return 'Весь мир';
     }
-
-    /** @return ErrandInfo */
-    protected function getErrandInfo(): ErrandInfo
-    {
-        return new ErrandInfo(15, 25);
-    }
 }

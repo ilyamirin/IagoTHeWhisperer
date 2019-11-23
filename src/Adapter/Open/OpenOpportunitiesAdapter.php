@@ -10,10 +10,4 @@ class OpenOpportunitiesAdapter extends OpenAdapter
     {
         return 'Открытые возможности';
     }
-
-    /** @return ErrandInfo */
-    protected function getErrandInfo(): ErrandInfo
-    {
-        return new ErrandInfo(1, 0);
-    }
 }

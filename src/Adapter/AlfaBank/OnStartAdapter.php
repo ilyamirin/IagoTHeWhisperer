@@ -11,10 +11,4 @@ class OnStartAdapter extends AlfaBankAdapter
     {
         return 'На старт';
     }
-
-    /** @return ErrandInfo */
-    protected function getErrandInfo(): ErrandInfo
-    {
-        return new ErrandInfo(3, 50);
-    }
 }

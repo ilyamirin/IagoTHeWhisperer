@@ -11,10 +11,4 @@ class VEDAdapter extends AlfaBankAdapter
     {
         return 'ВЭД +';
     }
-
-    /** @return ErrandInfo */
-    protected function getErrandInfo(): ErrandInfo
-    {
-        return new ErrandInfo(15, 25);
-    }
 }

@@ -10,10 +10,4 @@ class FastGrowAdapter extends OpenAdapter
     {
         return 'Быстрый рост';
     }
-
-    /** @return ErrandInfo */
-    protected function getErrandInfo(): ErrandInfo
-    {
-        return new ErrandInfo(7, 50);
-    }
 }

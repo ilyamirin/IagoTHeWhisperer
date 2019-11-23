@@ -52,6 +52,16 @@ class Tariff
     private $extraditionRanges;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $freeErrandsAmount;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $errandCost;
+
+    /**
      * @var TransferRange[]
      * @ORM\OneToMany(targetEntity="TransferRange", mappedBy="tariff", cascade={"all"}, orphanRemoval=true)
      */
@@ -198,6 +208,30 @@ class Tariff
     public function removeExtraditionRange(ExtraditionRange $extraditionRange): self
     {
         $this->extraditionRanges->removeElement($extraditionRange);
+
+        return $this;
+    }
+
+    public function getFreeErrandsAmount(): int
+    {
+        return $this->freeErrandsAmount;
+    }
+
+    public function setFreeErrandsAmount(int $freeErrandsAmount): self
+    {
+        $this->freeErrandsAmount = $freeErrandsAmount;
+
+        return $this;
+    }
+
+    public function getErrandCost(): float
+    {
+        return $this->errandCost;
+    }
+
+    public function setErrandCost(float $errandCost): self
+    {
+        $this->errandCost = $errandCost;
 
         return $this;
     }

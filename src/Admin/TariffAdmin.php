@@ -11,6 +11,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 use Sonata\Form\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -23,6 +25,8 @@ class TariffAdmin extends AbstractAdmin
     const LABEL_YEAR_SERVICE = 'Бизнес-карты (годовое обслуживание)';
     const LABEL_RECEPTION = 'Прием на баковская карта/касса';
     const LABEL_EXTRADITION = 'Выдача с банковской карты';
+    const LABEL_FREE_ERRANDS_AMOUNT = 'Количество бесплатных платежных поручений';
+    const LABEL_COST_ERRAND = 'Стоимость платежного поручения';
     const LABEL_TRANSFERS = 'Перевод на физическое лицо';
     const LABEL_CHECK = 'Выдача по чеку';
     const LABEL_COMMENT = 'Коментарии';
@@ -82,6 +86,15 @@ class TariffAdmin extends AbstractAdmin
             ->add('yearService', TextareaType::class, [
                 'label' => self::LABEL_YEAR_SERVICE,
             ])
+            ->add('freeErrandsAmount', IntegerType::class, [
+                'label' => self::LABEL_FREE_ERRANDS_AMOUNT
+            ])
+            ->add('errandCost', NumberType::class, [
+                'label' => self::LABEL_COST_ERRAND
+            ])
+            ->add('comment', TextareaType::class, [
+                'label' => self::LABEL_COMMENT,
+            ])
             ->add('receptionRanges', CollectionType::class,
                 [
                     'label' => self::LABEL_RECEPTION,
@@ -138,9 +151,6 @@ class TariffAdmin extends AbstractAdmin
                     'inline' => 'table'
                 ]
             )
-            ->add('comment', TextareaType::class, [
-                'label' => self::LABEL_COMMENT,
-            ])
         ;
     }
 

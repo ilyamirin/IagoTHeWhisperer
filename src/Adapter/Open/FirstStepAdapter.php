@@ -10,10 +10,4 @@ class FirstStepAdapter extends OpenAdapter
     {
         return 'Первый шаг';
     }
-
-    /** @return ErrandInfo */
-    protected function getErrandInfo(): ErrandInfo
-    {
-        return new ErrandInfo(3, 100);
-    }
 }

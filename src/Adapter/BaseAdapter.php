@@ -26,7 +26,7 @@ abstract class BaseAdapter
             $tariff,
             $this->calculateReception($tariff->getReceptionRanges(), $profile->getReception()),
             $this->calculateExtradition($tariff->getExtraditionRanges(), $profile->getExtradition()),
-            $this->calculateErrands($profile->getErrands()),
+            $this->calculateErrands($tariff->getFreeErrandsAmount(), $tariff->getErrandCost(), $profile->getErrands()),
             $this->calculateTransfers($tariff->getTransferRanges(), $profile->getTransfers()),
             $this->calculateCheck($tariff->getCheckRanges(), $profile->getCheck())
         );
@@ -36,9 +36,6 @@ abstract class BaseAdapter
      * @return string
      */
     public static abstract function getDefaultIndexName(): string;
-
-    /** @return ErrandInfo  */
-    protected abstract function getErrandInfo(): ErrandInfo;
 
     /**
      * @param ReceptionRange[] $receptions
@@ -62,18 +59,18 @@ abstract class BaseAdapter
     }
 
     /**
+     * @param int $freeErrandsAmount
+     * @param float $errandCost
      * @param int $errands
      * @return float
      */
-    protected function calculateErrands(int $errands): float
+    protected function calculateErrands(int $freeErrandsAmount, float $errandCost, int $errands): float
     {
-        $errandInfo = $this->getErrandInfo();
-
-        if ($errands <= $errandInfo->getFreeErrands()) {
+        if ($errands <= $freeErrandsAmount) {
             return 0;
         }
 
-        return ($errands - $errandInfo->getFreeErrands()) * $errandInfo->getCostErrand();
+        return ($errands - $freeErrandsAmount) * $errandCost;
     }
 
     /**

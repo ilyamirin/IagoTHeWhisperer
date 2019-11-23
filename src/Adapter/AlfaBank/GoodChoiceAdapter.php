@@ -11,10 +11,4 @@ class GoodChoiceAdapter extends AlfaBankAdapter
     {
         return 'Удачный выбор';
     }
-
-    /** @return ErrandInfo */
-    protected function getErrandInfo(): ErrandInfo
-    {
-        return new ErrandInfo(10, 25);
-    }
 }

@@ -10,10 +10,4 @@ class OwnBusinessAdapter extends OpenAdapter
     {
         return 'Свой бизнес';
     }
-
-    /** @return ErrandInfo */
-    protected function getErrandInfo(): ErrandInfo
-    {
-        return new ErrandInfo(15, 25);
-    }
 }
