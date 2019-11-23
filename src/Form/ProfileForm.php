@@ -15,7 +15,7 @@ class ProfileForm extends AbstractType
         $builder
             ->add('reception', NumberType::class, $this->generateFieldOptions('Прием на баковская карта/касса'))
             ->add('extradition', NumberType::class, $this->generateFieldOptions('Выдача с банковской карты'))
-            ->add('errands', NumberType::class, $this->generateFieldOptions('Бесплатные платежные поручения'))
+            ->add('errands', NumberType::class, $this->generateFieldOptions('Количество платежных поручений'))
             ->add('transfers', NumberType::class, $this->generateFieldOptions('Перевод на физическое лицо'))
             ->add('check', NumberType::class, $this->generateFieldOptions('Выдача по чеку'))
         ;
