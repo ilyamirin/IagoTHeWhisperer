@@ -3,11 +3,13 @@
 namespace App\Service;
 
 use App\Adapter\AbstractBaseAdapter;
+use App\Entity\Bank;
 use App\Entity\Tariff;
-use App\Model\BankResult;
 use App\Model\Profile;
 use App\Model\TariffResult;
 use App\Repository\TariffRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class ProfileService
 {
@@ -36,8 +38,16 @@ class ProfileService
      */
     public function getResult(Profile $profile): array
     {
+        $bankIds = $profile->getBanks()->map(function(Bank $bank) {
+            return $bank->getId();
+        })->toArray();
+
         /** @var Tariff[] $tariffs */
-        $tariffs = $this->tariffRepository->findAll();
+        $tariffs = new ArrayCollection($this->tariffRepository->findAll());
+
+        $tariffs = $tariffs->filter(function(Tariff $tariff) use ($bankIds) {
+            return in_array($tariff->getBank()->getId(), $bankIds);
+        });
 
         $tariffsResult = [];
         foreach ($tariffs as $tariff) {

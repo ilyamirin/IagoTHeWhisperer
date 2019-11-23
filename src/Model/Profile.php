@@ -2,8 +2,16 @@
 
 namespace App\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 class Profile
 {
+    /**
+     * @var Collection
+     */
+    private $banks;
+
     /** @var int */
     // Прием на баковская карта/касса
     private $reception;
@@ -38,11 +46,24 @@ class Profile
         ?int $transfers = null,
         ?int $check = null
     ) {
+        $this->banks = new ArrayCollection();
         $this->reception = $reception;
         $this->extradition = $extradition;
         $this->errands = $errands;
         $this->transfers = $transfers;
         $this->check = $check;
+    }
+
+    public function getBanks(): ?Collection
+    {
+        return $this->banks;
+    }
+
+    public function setBanks(Collection $banks): self
+    {
+        $this->banks = $banks;
+
+        return $this;
     }
 
     /**

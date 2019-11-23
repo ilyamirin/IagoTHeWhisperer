@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Bank;
 use App\Model\Profile;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,6 +15,14 @@ class ProfileForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('banks', EntityType::class, [
+                'class' => Bank::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'Банки',
+                'required' => true
+            ])
             ->add('reception', NumberType::class, $this->generateFieldOptions('Прием на баковская карта/касса'))
             ->add('extradition', NumberType::class, $this->generateFieldOptions('Выдача с банковской карты'))
             ->add('errands', NumberType::class, $this->generateFieldOptions('Количество платежных поручений'))
